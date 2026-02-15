@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const Product = require('./models/product.model.js')
@@ -19,12 +20,10 @@ app.get('/', (req, res) => {
 });
 
 
-
-
-mongoose.connect("mongodb+srv://admin:admin123@backenddb.hppizui.mongodb.net/Node-API?appName=BackendDB")
+mongoose.connect(process.env.MONGO_URI)
 .then(() => {
     console.log("Connected to database!")
-    
+    const PORT = process.env.PORT || 3000;
     app.listen(3000, () => {
         console.log("Server is running on PORT 3000")
     });
